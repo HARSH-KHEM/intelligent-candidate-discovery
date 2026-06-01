@@ -1,17 +1,24 @@
-FROM node:18-alpine
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm ci --production=false
+RUN npm ci
 
-# Copy source code
+# Copy source and build
 COPY . .
-
-# Build for production
 RUN npm run build
+
+# Production stage
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN npm install -g serve@14
+
+COPY --from=build /app/dist ./dist
 
 EXPOSE 3000
 
-CMD ["npx", "serve", "-s", "build", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "3000"]
