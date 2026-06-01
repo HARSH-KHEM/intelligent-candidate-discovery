@@ -1,0 +1,29 @@
+# Intelligent Candidate Discovery — ML Service Dependencies
+
+# Core ML
+sentence-transformers==3.0.1
+transformers==4.44.2
+torch==2.4.1
+numpy==1.26.4
+scikit-learn==1.5.1
+
+# Vector search
+faiss-cpu==1.8.0.post1
+
+# NLP
+spacy==3.7.6
+
+# LLM reranking
+openai==1.43.0
+
+# PDF parsing (for resume uploads)
+PyMuPDF==1.24.9
+
+# API service
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.1
+
+# Utilities
+python-dotenv==1.0.1
+tqdm==4.66.5
