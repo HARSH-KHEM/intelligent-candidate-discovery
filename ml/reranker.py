@@ -14,6 +14,7 @@ import json
 import logging
 import os
 from dataclasses import dataclass
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -76,11 +77,14 @@ INSTRUCTIONS:
 1. Re-rank the candidates considering the JD requirements holistically.
 2. Consider skill depth, not just keyword overlap.
 3. Weight practical experience and role relevance highly.
-4. For each candidate, provide a one-sentence explanation of their ranking.
+4. For each candidate, provide a UNIQUE one-sentence explanation of their ranking.
+5. You MUST explicitly reference their specific dimensional scores (e.g., Semantic, Experience, Behavioral, Context) and profile details in the explanation.
+Example Explanation: 'High semantic match (0.790) and strong experience (0.910) but low behavioral signals (0.580) suggest a solid technical fit with limited recent activity.'
+Make each explanation completely different and personalized to the candidate's actual data.
 
 OUTPUT FORMAT (valid JSON array, no markdown):
 [
-  {{"candidate_id": "CID-XXXX", "rank": 1, "explanation": "One sentence reason."}},
+  {{"candidate_id": "CID-XXXX", "rank": 1, "explanation": "One sentence reason referencing specific scores and profile."}},
   ...
 ]
 
@@ -95,7 +99,7 @@ class LLMReranker:
     def __init__(
         self,
         model: str = DEFAULT_MODEL,
-        api_key: str | None = None,
+        api_key: Optional[str] = None,
     ):
         """
         Initialize the reranker.
