@@ -14,7 +14,7 @@ faiss-cpu==1.8.0.post1
 spacy==3.7.6
 
 # LLM reranking
-openai==1.43.0
+groq==0.11.0
 
 # PDF parsing (for resume uploads)
 PyMuPDF==1.24.9

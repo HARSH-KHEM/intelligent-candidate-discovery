@@ -17,7 +17,7 @@ from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_MODEL = "gpt-4o-mini"
+DEFAULT_MODEL = "llama3-8b-8192"
 DEFAULT_TOP_K = 50
 
 
@@ -90,7 +90,7 @@ Return ONLY the JSON array. Include ALL candidates."""
 
 
 class LLMReranker:
-    """Re-ranks candidates using GPT-4o-mini for refined ordering and explanations."""
+    """Re-ranks candidates using Groq LLM for refined ordering and explanations."""
 
     def __init__(
         self,
@@ -101,23 +101,23 @@ class LLMReranker:
         Initialize the reranker.
 
         Args:
-            model: OpenAI model to use.
-            api_key: OpenAI API key (falls back to OPENAI_API_KEY env var).
+            model: Groq model to use.
+            api_key: Groq API key (falls back to GROQ_API_KEY env var).
         """
         self.model = model
-        self.api_key = api_key or os.environ.get("OPENAI_API_KEY", "")
+        self.api_key = api_key or os.environ.get("GROQ_API_KEY", "")
         self._client = None
 
     def _get_client(self):
-        """Lazy-load the OpenAI client."""
+        """Lazy-load the Groq client."""
         if self._client is None:
             try:
-                from openai import OpenAI
-                self._client = OpenAI(api_key=self.api_key)
+                from groq import Groq
+                self._client = Groq(api_key=self.api_key)
             except ImportError:
                 raise ImportError(
-                    "openai package required for LLM reranking. "
-                    "Install with: pip install openai"
+                    "groq package required for LLM reranking. "
+                    "Install with: pip install groq"
                 )
         return self._client
 
@@ -143,7 +143,7 @@ class LLMReranker:
 
         if not self.api_key:
             logger.warning(
-                "No OPENAI_API_KEY set. Skipping LLM reranking, "
+                "No GROQ_API_KEY set. Skipping LLM reranking, "
                 "returning original order with default explanations."
             )
             return self._fallback_rerank(candidates)
