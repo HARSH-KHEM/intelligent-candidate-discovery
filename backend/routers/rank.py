@@ -68,6 +68,8 @@ async def rank_candidates(
                 top_k=request.top_k,
                 use_reranker=request.use_reranker,
             )
+            if "ranked_candidates" in result:
+                result["ranked_candidates"] = result["ranked_candidates"][:request.top_k]
             return result
         except Exception as e:
             logger.error(f"Ranking failed: {e}", exc_info=True)

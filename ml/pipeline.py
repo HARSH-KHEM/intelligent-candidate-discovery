@@ -117,7 +117,7 @@ class RankingPipeline:
         candidate_ids = [c.get("candidate_id", f"CID-{i}") for i, c in enumerate(candidates)]
         self.candidate_index.add(candidate_embeddings, candidate_ids)
 
-        search_results = self.candidate_index.search(jd_embedding, top_k=len(candidates))
+        search_results = self.candidate_index.search(jd_embedding, top_k=min(self.top_k, len(candidates)))
 
         # Map candidate_id → semantic score
         semantic_scores = {r.candidate_id: r.score for r in search_results}
@@ -179,6 +179,9 @@ class RankingPipeline:
                     "context_score": s.context_score,
                     "explanation": s.explanation,
                 })
+
+        # ── Slice to Top-K ────────────────────────────────────────────
+        final_results = final_results[:self.top_k]
 
         # ── Step 6: Export results ────────────────────────────
         if output_path:
