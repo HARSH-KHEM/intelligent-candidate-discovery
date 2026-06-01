@@ -8,12 +8,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
-COPY requirements.txt .
+COPY ml/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy source code
-COPY . .
+COPY ml/ ./ml/
 
+ENV PYTHONPATH=/app
 EXPOSE 8001
 
-CMD ["uvicorn", "pipeline:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "ml.pipeline:app", "--host", "0.0.0.0", "--port", "8001"]
