@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: icd-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - icd-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ml:
+    build:
+      context: ./ml
+      dockerfile: Dockerfile
+    container_name: icd-ml
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - icd-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: icd-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      ml:
+        condition: service_started
+    networks:
+      - icd-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: icd-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - icd-network
+
+volumes:
+  mongo_data:
+
+networks:
+  icd-network:
+    driver: bridge

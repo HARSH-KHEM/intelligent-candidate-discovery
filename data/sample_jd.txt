@@ -1,0 +1,81 @@
+═══════════════════════════════════════════════════════════════
+                    JOB DESCRIPTION
+═══════════════════════════════════════════════════════════════
+
+Title:          Senior Backend Engineer
+Company:        TechNova Solutions Pvt. Ltd.
+Location:       Bengaluru, India (Hybrid — 3 days on-site)
+Experience:     5–8 years
+Employment:     Full-time
+
+───────────────────────────────────────────────────────────────
+ABOUT THE ROLE
+───────────────────────────────────────────────────────────────
+
+We are looking for a Senior Backend Engineer to design, build,
+and scale our core platform services that power real-time data
+processing for 10M+ daily active users. You will work closely
+with ML engineers, product managers, and DevOps to ship
+high-impact features in a fast-paced environment.
+
+───────────────────────────────────────────────────────────────
+RESPONSIBILITIES
+───────────────────────────────────────────────────────────────
+
+• Design and implement scalable RESTful APIs and microservices
+  using Python (FastAPI / Django) or Go.
+• Architect distributed systems handling 50k+ requests/second
+  with sub-100ms latency requirements.
+• Own database design and optimization for PostgreSQL and
+  MongoDB, including query tuning and schema migrations.
+• Build and maintain CI/CD pipelines with Docker, Kubernetes,
+  and GitHub Actions.
+• Implement event-driven architectures using Kafka or RabbitMQ
+  for asynchronous processing.
+• Collaborate with ML teams to productionize machine learning
+  models and serve predictions at scale.
+• Conduct code reviews, mentor junior engineers, and drive
+  engineering best practices across the team.
+• Monitor system health using Prometheus, Grafana, and ELK
+  stack; lead incident response and postmortems.
+
+───────────────────────────────────────────────────────────────
+REQUIRED SKILLS
+───────────────────────────────────────────────────────────────
+
+• Python (advanced), with strong experience in FastAPI or
+  Django REST Framework.
+• Solid understanding of distributed systems, microservices
+  architecture, and API design patterns.
+• Proficiency with PostgreSQL, MongoDB, and Redis.
+• Hands-on experience with Docker, Kubernetes, and cloud
+  platforms (AWS / GCP / Azure).
+• Experience with message queues (Kafka, RabbitMQ, or SQS).
+• Strong grasp of data structures, algorithms, and system
+  design principles.
+• Familiarity with CI/CD tools (GitHub Actions, Jenkins, or
+  GitLab CI).
+
+───────────────────────────────────────────────────────────────
+PREFERRED QUALIFICATIONS
+───────────────────────────────────────────────────────────────
+
+• Experience with GraphQL or gRPC.
+• Contributions to open-source projects.
+• Knowledge of ML model serving (TensorFlow Serving, Triton,
+  or similar).
+• B.Tech / M.Tech in Computer Science or related field from a
+  top-tier institution.
+• Prior startup or high-growth company experience.
+
+───────────────────────────────────────────────────────────────
+WHAT WE OFFER
+───────────────────────────────────────────────────────────────
+
+• Competitive salary: ₹28–45 LPA + ESOPs
+• Health insurance for you and your family
+• Learning budget of ₹1,00,000/year
+• Flexible work hours and hybrid work model
+• Team offsites and hackathon culture
+
+═══════════════════════════════════════════════════════════════

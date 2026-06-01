@@ -1,0 +1,16 @@
+🚀 We just built an AI-powered hiring system at the INDIA RUNS hackathon — and it changes how companies find talent.
+
+Traditional hiring relies on keyword matching. Our system goes deeper: it uses semantic embeddings to understand what a candidate actually brings, not just buzzwords on a resume.
+
+In 27 days, our team built a full-stack platform that:
+🔹 Generates vector embeddings from resumes and JDs
+🔹 Scores candidates across 4 dimensions — semantic fit, experience depth, behavioral signals, and contextual relevance
+🔹 Ranks 500+ candidates in seconds with explainable AI scores
+
+The result? Hiring managers get a ranked shortlist with clear reasoning — no more guesswork, no more bias from keyword filters.
+
+Built with FastAPI, React, FAISS, MongoDB, and GPT-4o.
+
+Proud of what our team shipped. The future of hiring is intelligent, not just automated. 💡
+
+#IndiaRuns #AI #Hackathon #Hiring #MachineLearning #NLP #BuildInPublic
