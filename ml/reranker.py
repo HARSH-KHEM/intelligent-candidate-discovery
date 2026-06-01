@@ -183,7 +183,8 @@ class LLMReranker:
             return self._process_llm_response(parsed, candidates)
 
         except Exception as e:
-            logger.error(f"LLM reranking failed: {e}. Using fallback.")
+            import traceback
+            logger.error(f"LLM reranking failed: {type(e).__name__} - {str(e)}\n{traceback.format_exc()}")
             return self._fallback_rerank(candidates)
 
     def _process_llm_response(
@@ -250,33 +251,33 @@ class LLMReranker:
         )
 
         for rank, c in enumerate(sorted_candidates, start=1):
-            # Generate a basic explanation from scores
-            parts = []
-            if c.get("semantic_score", 0) >= 0.6:
-                parts.append("strong skill match")
-            elif c.get("semantic_score", 0) >= 0.3:
-                parts.append("moderate skill alignment")
-            else:
-                parts.append("limited skill overlap")
-
-            yoe = c.get("years_experience", "?")
-            parts.append(f"{yoe}y experience")
-
-            role = c.get("current_role", "")
-            if role:
-                parts.append(f"currently {role}")
-
-            explanation = ". ".join(p.capitalize() for p in parts) + "."
+            sem = c.get("semantic_score", 0.0)
+            exp = c.get("experience_score", 0.0)
+            beh = c.get("behavioral_score", 0.0)
+            ctx = c.get("context_score", 0.0)
+            
+            # Determine reason based on highest/lowest scores
+            scores = {"semantic match": sem, "experience": exp, "behavioral signals": beh, "contextual fit": ctx}
+            sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+            highest = sorted_scores[0]
+            lowest = sorted_scores[-1]
+            
+            reason = f"Strong {highest[0]} but needs improvement in {lowest[0]}."
+            
+            explanation = (
+                f"Semantic: {int(sem*100)}%, Experience: {int(exp*100)}%, "
+                f"Behavioral: {int(beh*100)}%, Context: {int(ctx*100)}% — {reason}"
+            )
 
             results.append(RerankedCandidate(
                 candidate_id=c["candidate_id"],
                 rank=rank,
                 final_score=c.get("final_score", 0.0),
                 explanation=explanation,
-                semantic_score=c.get("semantic_score", 0.0),
-                experience_score=c.get("experience_score", 0.0),
-                behavioral_score=c.get("behavioral_score", 0.0),
-                context_score=c.get("context_score", 0.0),
+                semantic_score=sem,
+                experience_score=exp,
+                behavioral_score=beh,
+                context_score=ctx,
             ))
 
         return results

@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 
 # ─── Constants ───────────────────────────────────────────────
 DEFAULT_TOP_K = 50
-DEFAULT_BATCH_SIZE = 64
+DEFAULT_BATCH_SIZE = 32
 
 
 class RankingPipeline:

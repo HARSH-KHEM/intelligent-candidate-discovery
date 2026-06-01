@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 # ─── Constants ───────────────────────────────────────────────
 DEFAULT_MODEL = "all-MiniLM-L6-v2"
 EMBEDDING_DIM = 384
-DEFAULT_BATCH_SIZE = 64
+DEFAULT_BATCH_SIZE = 32
 
 
 class EmbeddingEngine:
